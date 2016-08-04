@@ -506,3 +506,32 @@ class KikBotMessagesTest(TestCase):
             'type': 'picture',
             'chatId': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
         })
+
+    def test_repr_magic_method(self):
+        self.assertEqual(str([TextMessage(body='hey', to='kevin')]),
+                         "[TextMessage({'body': 'hey', 'type_time': None, 'mention': None, 'timestamp': None, "
+                         "'keyboards': [], 'read_receipt_requested': None, 'delay': None, 'to': 'kevin', "
+                         "'participants': None, 'chat_id': None, 'from_user': None, 'type': 'text', 'id': None})]")
+
+        self.assertEqual(str([PictureMessage(
+            pic_url='http://foo.bar/image',
+            to='aleem',
+            mention='anotherbot',
+            chat_id='e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
+            keyboards=[
+                SuggestedResponseKeyboard(
+                    hidden=True,
+                    responses=[
+                        TextResponse('Foo')
+                    ]
+                )
+            ],
+            attribution=CustomAttribution(name='Foobar'),
+            delay=100
+        )]), "[PictureMessage({'attribution': CustomAttribution({'icon_url': None, 'name': 'Foobar'}), "
+             "'mention': 'anotherbot', 'timestamp': None, "
+             "'keyboards': [SuggestedResponseKeyboard({'to': None, 'hidden': True, 'type': 'suggested', "
+             "'responses': [TextResponse({'body': 'Foo', 'type': 'text'})]})], 'read_receipt_requested': None, "
+             "'pic_url': 'http://foo.bar/image', 'delay': 100, 'to': 'aleem', 'participants': None, "
+             "'chat_id': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', "
+             "'from_user': None, 'type': 'picture', 'id': None})]")

@@ -15,6 +15,9 @@ class Resource(object):
     def __str__(self):
         return json.dumps(self.to_json())
 
+    def __repr__(self):
+        return "%s(%r)" % (self.__class__.__name__, self.__dict__)
+
     def to_json(self):
         output_json = {}
         for obj_key, json_key in iteritems(self.property_mapping()):
