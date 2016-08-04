@@ -10,6 +10,9 @@ class Resource(object):
     def __ne__(self, other):
         return not self == other
 
+    def __repr__(self):
+        return str(self.to_json())
+
     def to_json(self):
         output_json = {}
         for obj_key, json_key in iteritems(self.property_mapping()):
