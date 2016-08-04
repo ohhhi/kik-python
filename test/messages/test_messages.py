@@ -474,7 +474,7 @@ class KikBotMessagesTest(TestCase):
 
         self.assertNotEqual(message1, message2)
 
-    def test_repr_magic_method(self):
+    def test_str_magic_method(self):
         message = TextMessage(body='Hi there', to='kevin')
         self.assertDictEqual(json.loads(str(message)), {'body': 'Hi there', 'to': 'kevin', 'type': 'text'})
 

@@ -12,7 +12,7 @@ class Resource(object):
     def __ne__(self, other):
         return not self == other
 
-    def __repr__(self):
+    def __str__(self):
         return json.dumps(self.to_json())
 
     def to_json(self):
