@@ -1,3 +1,4 @@
+import json
 from unittest import TestCase
 
 from kik.messages import IsTypingMessage, LinkMessage, PictureMessage, ReadReceiptMessage, TextMessage, VideoMessage, \
@@ -475,7 +476,7 @@ class KikBotMessagesTest(TestCase):
 
     def test_repr_magic_method(self):
         message = TextMessage(body='Hi there', to='kevin')
-        self.assertEqual(str(message), "{'body': 'Hi there', 'to': 'kevin', 'type': 'text'}")
+        self.assertDictEqual(json.loads(str(message)), {'body': 'Hi there', 'to': 'kevin', 'type': 'text'})
 
         message = PictureMessage(
             pic_url='http://foo.bar/image',
@@ -494,8 +495,14 @@ class KikBotMessagesTest(TestCase):
             delay=100
         )
 
-        self.assertEqual(str(message), "{'attribution': {'name': 'Foobar'}, 'mention': 'anotherbot', "
-                                       "'keyboards': [{'hidden': True, 'type': 'suggested', 'responses': "
-                                       "[{'body': 'Foo', 'type': 'text'}]}], 'delay': 100, 'to': 'aleem', "
-                                       "'picUrl': 'http://foo.bar/image', 'type': 'picture', "
-                                       "'chatId': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'}")
+        self.assertDictEqual(json.loads(str(message)), {
+            'attribution': {'name': 'Foobar'},
+            'mention': 'anotherbot',
+            'keyboards':
+                [{'hidden': True, 'type': 'suggested', 'responses': [{'body': 'Foo', 'type': 'text'}]}],
+            'delay': 100,
+            'to': 'aleem',
+            'picUrl': 'http://foo.bar/image',
+            'type': 'picture',
+            'chatId': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+        })

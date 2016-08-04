@@ -1,3 +1,5 @@
+import json
+
 from six import iteritems
 
 
@@ -11,7 +13,7 @@ class Resource(object):
         return not self == other
 
     def __repr__(self):
-        return str(self.to_json())
+        return json.dumps(self.to_json())
 
     def to_json(self):
         output_json = {}
