@@ -12,9 +12,6 @@ class Resource(object):
     def __ne__(self, other):
         return not self == other
 
-    def __str__(self):
-        return json.dumps(self.to_json())
-
     def __repr__(self):
         return "%s(%r)" % (self.__class__.__name__, self.__dict__)
 

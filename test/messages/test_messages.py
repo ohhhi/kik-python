@@ -474,39 +474,6 @@ class KikBotMessagesTest(TestCase):
 
         self.assertNotEqual(message1, message2)
 
-    def test_str_magic_method(self):
-        message = TextMessage(body='Hi there', to='kevin')
-        self.assertDictEqual(json.loads(str(message)), {'body': 'Hi there', 'to': 'kevin', 'type': 'text'})
-
-        message = PictureMessage(
-            pic_url='http://foo.bar/image',
-            to='aleem',
-            mention='anotherbot',
-            chat_id='e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855',
-            keyboards=[
-                SuggestedResponseKeyboard(
-                    hidden=True,
-                    responses=[
-                        TextResponse('Foo')
-                    ]
-                )
-            ],
-            attribution=CustomAttribution(name='Foobar'),
-            delay=100
-        )
-
-        self.assertDictEqual(json.loads(str(message)), {
-            'attribution': {'name': 'Foobar'},
-            'mention': 'anotherbot',
-            'keyboards':
-                [{'hidden': True, 'type': 'suggested', 'responses': [{'body': 'Foo', 'type': 'text'}]}],
-            'delay': 100,
-            'to': 'aleem',
-            'picUrl': 'http://foo.bar/image',
-            'type': 'picture',
-            'chatId': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
-        })
-
     def test_repr_magic_method(self):
         self.assertEqual(str([TextMessage(body='hey', to='kevin')]),
                          "[TextMessage({'body': 'hey', 'type_time': None, 'mention': None, 'timestamp': None, "
