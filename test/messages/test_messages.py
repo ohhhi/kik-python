@@ -1,4 +1,3 @@
-import json
 from unittest import TestCase
 
 from kik.messages import IsTypingMessage, LinkMessage, PictureMessage, ReadReceiptMessage, TextMessage, VideoMessage, \
